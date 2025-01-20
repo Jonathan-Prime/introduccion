@@ -28,6 +28,44 @@
   color: #61dafb;
 }
 
+.navbar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.lists {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.options {
+  margin: 0px 15px;
+  list-style: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.options:hover {
+  color: gray;
+}
+
+.button {
+  margin: 2;
+  padding: 10px 15px;
+  font-size: large;
+  background-color: antiquewhite;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: yellow;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
