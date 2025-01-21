@@ -1,25 +1,37 @@
 import "./assets/component.css";
-
+import React,{useState} from"react"
 function Formulario() {
-
-   const handleSubmit= () => { 
-
-    alert(`Datos enviados:\nNombre: ${formData.nombre}\nCorreo: ${formData.correo}\nCédula: ${formData.cedula}`);
+const [formData,setFormData] = useState ({
+    nombre: "",
+    cedula: "",
+    email: "",
+})
+const isFormIncomplete =
+    !formData.nombre || !formData.email || !formData.cedula;
+   const handleSubmit= (event) => { 
+event.preventDefault();
+    alert(`Datos enviados:\nNombre: ${formData.nombre}\nCorreo: ${formData.email}\nCédula: ${formData.cedula}`);
    }
 
 
-
+const handleChange= (event) => {
+    const {name,value}=event.target
+    setFormData({
+        ...formData,
+        [name] :value
+    })
+}
 
 
 return ( 
-    <form action="hola" onClick={handleSubmit()}>
+    <form action="hola" onSubmit={handleSubmit}>
         <label>nombre </label>
-        <input type="text" name= "nombre"/> 
+        <input onChange= {handleChange} type="text" name= "nombre" value={formData.nombre}/> 
         <label>numero </label>
-        <input type="number" name= "cedula"/>
+        <input onChange= {handleChange} type="number" name= "cedula" value={formData.cedula}/>
         <label>email </label>
-        <input type="email" name= "email"/>
-        <button type ="submit">Enviar</button>
+        <input onChange= {handleChange} type="email" name= "email"value={formData.email}/>
+        <button disabled={isFormIncomplete} type ="submit">Enviar</button> 
     </form>
 );
 
