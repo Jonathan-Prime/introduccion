@@ -60,36 +60,7 @@ function App() {
           <li className="options">Menu</li>
         </ul>
       </nav>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button
-          className="button"
-          onClick={(value) => funcionbutton((value = "123"))}
-        >
-          Cambiar opiones de footer
-        </button>
-
-        <button
-          className="button"
-          onClick={(number) => actualizar(increment)}
-        >
-         Actualizar
-        </button>
-        <p>
-          {increment}
-        </p>
-      </header>
+      
       <Formulario />
       <Component footerOptions={opcionesFooter} numberSecond={increment} actualizar={actualizar} />
     </div>
