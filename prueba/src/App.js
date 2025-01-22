@@ -1,8 +1,9 @@
-import logo from "./logo.svg";
+
 import "./App.css";
 import Component from "./Component";
 import React, { useEffect, useState } from "react";
 import Formulario from"./Form"
+import Logueo from './Login'
 
 function App() {
   const [opcionesFooter, setOpcionesFooter] = useState({
@@ -60,9 +61,15 @@ function App() {
           <li className="options">Menu</li>
         </ul>
       </nav>
-      
-      <Formulario />
       <Component footerOptions={opcionesFooter} numberSecond={increment} actualizar={actualizar} />
+    
+
+      <h1>Formulario de registro</h1>
+      <Formulario />
+      <br />
+      <br />
+      <h1>Formulario de login</h1>
+      <Logueo />
     </div>
   );
 }
