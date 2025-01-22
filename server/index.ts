@@ -12,7 +12,7 @@ const app = express();
 app
   .use(
     cors({
-      allowedOrigins: ["*",
+      allowedOrigins: ["http://localhost:3000",
       ],
       allowedHeaders: ["Authorization", "Content-Type", "token", 'origin'],
       credentials: true,
