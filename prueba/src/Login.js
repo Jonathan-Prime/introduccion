@@ -5,7 +5,6 @@ import React, { useState } from "react";
 function Formulario() {
   /* estados de los datos o variables */
   const [formData, setFormData] = useState({
-    name: "", /* variable de nombre iniciando vacio */
     email: "", /* variable de email iniciando vacio */
     password: "", /* variable de password iniciando vacio  */
   });

@@ -1,7 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
-import mongoose from "mongoose";
-const { ObjectId } = require('mongoose');
 
 type User = {
   _id: string;
@@ -19,26 +17,16 @@ declare global {
 
 const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    let token: string | string[] | undefined = req?.headers?.token;
-
-    if (Array.isArray(token)) {
-      token = token[0];
-    }
-
-    if (!token) {
-      req.user = { _id: new mongoose.Types.ObjectId().toHexString(), name: 'Visitante', email: 'guest@example.com' };
-      return next();
-    }
-
+    let token = req?.headers?.authorization?.split(`"`)[1];
+    if (!token) return res.status(401).send({ message: "Unauthorized" });
     let decoded = await verify(token, process.env.JWT_SECRET as string);
-    console.log('decodificado', decoded)
+    console.log(process.env.JWT_SECRET)
     req.user = decoded as User;
     next();
   } catch (error: any) {
     console.log(error);
-    if (error.message === "jwt expired") {
+    if (error.message === "jwt expired")
       return res.status(401).send({ message: "Unauthorized" });
-    }
 
     res.status(400).send({ message: "Error" });
   }
