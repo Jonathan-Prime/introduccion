@@ -11,21 +11,20 @@ function Formulario() {
 
   /*  validacion de que el boton enviar esta deshabilitado cuando no se hayan llenado los campos */
   const isFormIncomplete =
-    formData.name === '' || formData.email === '' || formData.password === '';
+    formData.email === '' || formData.password === '';
 
 
   /* evento que accion el boton de enviar cuando se active */
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    createUser({
-      name: formData.name,
+    loginUser({
       email: formData.email,
       password: formData.password,
     });
   };
 
-  async function createUser(userData) { /* userData son los datos que enviamos en el handlesubmit */
+  async function loginUser(userData) { /* userData son los datos que enviamos en el handlesubmit */
     /* hacemos intento */
     try {
       // Create the URL
@@ -46,10 +45,8 @@ function Formulario() {
       const response = await fetch(url, { method: "POST", headers, body });
 
 
-      alert("El usuario se ha creado con exito");
+      alert("El usuario se ha logueado con exito");
 
-      /* vaciar los datos */
-      setFormData({})
       // Check the response status
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -71,13 +68,6 @@ function Formulario() {
 
   return (
     <form action="hola" onSubmit={handleSubmit}>
-      <label>nombre </label>
-      <input
-        onChange={handleChange}
-        type="text"
-        name="name"
-        value={formData.name}
-      />
       <label> correo </label>
       <input
         onChange={handleChange}
