@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Formulario from"./Form"
 import Logueo from './Login'
 
+
 function App() {
   const [opcionesFooter, setOpcionesFooter] = useState({
     opcion1: "Inicio",
@@ -70,6 +71,7 @@ function App() {
       <br />
       <h1>Formulario de login</h1>
       <Logueo />
+      
     </div>
   );
 }

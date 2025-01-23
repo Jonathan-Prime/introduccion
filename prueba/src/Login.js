@@ -2,17 +2,16 @@
 
 import "./assets/component.css";
 import React, { useState } from "react";
-function Formulario() {
+import Usuarios from "./Usuarios";
+function Formulario(getUsersAvailable) {
   /* estados de los datos o variables */
   const [formData, setFormData] = useState({
-    email: "", /* variable de email iniciando vacio */
-    password: "", /* variable de password iniciando vacio  */
+    email: "" /* variable de email iniciando vacio */,
+    password: "" /* variable de password iniciando vacio  */,
   });
 
   /*  validacion de que el boton enviar esta deshabilitado cuando no se hayan llenado los campos */
-  const isFormIncomplete =
-    formData.email === '' || formData.password === '';
-
+  const isFormIncomplete = formData.email === "" || formData.password === "";
 
   /* evento que accion el boton de enviar cuando se active */
   const handleSubmit = (event) => {
@@ -24,7 +23,8 @@ function Formulario() {
     });
   };
 
-  async function loginUser(userData) { /* userData son los datos que enviamos en el handlesubmit */
+  async function loginUser(userData) {
+    /* userData son los datos que enviamos en el handlesubmit */
     /* hacemos intento */
     try {
       // Create the URL
@@ -38,13 +38,17 @@ function Formulario() {
       // Datos de la peticion
       const body = JSON.stringify(userData);
 
-
       // Enviamos los datos al servidos
       /* enviamos la url (La variable que asignamos en la linea 42), el tipo de metodo (POST),
       enviamos los headers (linea 45), y enviamos los datos del formulario (body) linea 50 */
       const response = await fetch(url, { method: "POST", headers, body });
 
+      const data = await response.json();
+      const token = data.token;
 
+      // Guardar el token en localStorage
+      localStorage.setItem("Authorization", `Bearer ${token}`);
+      getUsersAvailable();
       alert("El usuario se ha logueado con exito");
 
       // Check the response status
@@ -67,25 +71,31 @@ function Formulario() {
   };
 
   return (
-    <form action="hola" onSubmit={handleSubmit}>
-      <label> correo </label>
-      <input
-        onChange={handleChange}
-        type="text"
-        name="email"
-        value={formData.email}
-      />
-      <label>contraseña </label>
-      <input
-        onChange={handleChange}
-        type="password"
-        name="password"
-        value={formData.password}
-      />
-      <button disabled={isFormIncomplete === true} type="submit">
-        Enviar
-      </button>
-    </form>
+    <>
+      <form action="hola" onSubmit={handleSubmit}>
+        <label> correo </label>
+        <input
+          onChange={handleChange}
+          type="text"
+          name="email"
+          value={formData.email}
+        />
+        <label>contraseña </label>
+        <input
+          onChange={handleChange}
+          type="password"
+          name="password"
+          value={formData.password}
+        />
+        <button disabled={isFormIncomplete === true} type="submit">
+          Enviar
+        </button>
+      </form>
+      <br />
+      <br />
+      <h1>Listar usuarios del proyecto</h1>
+      <Usuarios />
+    </>
   );
 }
 
